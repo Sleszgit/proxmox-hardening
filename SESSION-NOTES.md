@@ -1,7 +1,7 @@
 # Session Notes - Proxmox Hardening Project
 
-**Date:** 2025-12-09 (Updated)
-**Session Status:** Phase A Scripts Created - Partially Executed (4/6 Complete)
+**Date:** 2025-12-09 (Updated - Session 3)
+**Session Status:** Phase A - SSH Keys Working, Checkpoint #1 In Progress
 
 ---
 
@@ -20,9 +20,12 @@
 - [x] **Script 02: Pre-hardening checks executed** ✓
 - [x] **Script 03: SMART monitoring executed** ✓
 - [x] Fixed Proxmox repository warning (removed subscription popup)
+- [x] **SSH key authentication WORKING for sleszugreen** ✓
+- [x] Generated new SSH key pair (no passphrase)
+- [x] Key file: `C:\Users\jakub\.ssh\ugreen_key`
 
 ### 🔄 In Progress
-- [ ] Execute Script 04: SSH key setup (NEXT STEP)
+- [ ] Add SSH key to root account
 - [ ] Execute Script 05: Remote Access Test (Checkpoint #1)
 
 ### ⏳ Pending
@@ -238,7 +241,7 @@ All items integrated into phased approach with remote access priority.
 - **19:00** - Plan approved, ready for script creation
 - **19:15** - Repository initialized, session saved
 
-### Session 2: 2025-12-09
+### Session 2: 2025-12-09 (Morning)
 - **04:45** - Session resumed
 - **04:55-05:01** - Created all Phase A scripts (00-05 + README)
 - **05:06** - Copied scripts to Proxmox host
@@ -249,7 +252,26 @@ All items integrated into phased approach with remote access priority.
 - **05:41** - Executed Script 03: SMART monitoring ✓
 - **05:42** - Session paused (Scripts 04-05 pending)
 
+### Session 3: 2025-12-09 (Evening)
+- **19:00** - Session resumed, attempted Script 04 execution
+- **19:10-21:30** - SSH key setup troubleshooting (~2.5 hours)
+  - **Challenge:** Multiple attempts to add public key to authorized_keys
+  - **Issue 1:** Key breaking into multiple lines when pasted
+  - **Issue 2:** Existing Windows key (id_ed25519_ugreen) had forgotten passphrase
+  - **Solution:** Generated NEW key pair on Proxmox without passphrase
+- **21:15** - Created fresh SSH key pair: `/tmp/ugreen_key` (Proxmox)
+- **21:27** - Copied private key to Windows: `C:\Users\jakub\.ssh\ugreen_key`
+- **21:30** - ✅ **SSH key authentication WORKING for sleszugreen!**
+- **21:35** - Started Script 05 (Checkpoint #1) - discovered needs root SSH key too
+- **21:40** - Session paused
+
+**Lessons Learned:**
+- SSH authorized_keys MUST be single line (no line breaks)
+- Windows Notepad adds wrong line endings - use direct scp copy instead
+- Generating keys on Linux and copying to Windows more reliable than vice versa
+- Script 05 tests root SSH access, not sleszugreen
+
 **Next Session:**
-- Execute Script 04: SSH key setup (requires generating SSH keys on desktop)
-- Execute Script 05: Remote Access Test (Checkpoint #1) - MUST PASS before Phase B
-- Create Phase B scripts if Checkpoint #1 passes
+- Add SSH public key to root's authorized_keys
+- Complete Script 05: Remote Access Test (Checkpoint #1)
+- Verify all 7 checkpoint tests pass before Phase B
