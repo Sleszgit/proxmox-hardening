@@ -1,7 +1,7 @@
 # Session Notes - Proxmox Hardening Project
 
-**Date:** 2025-12-08
-**Session Status:** Planning Complete - Ready for Script Creation
+**Date:** 2025-12-09 (Updated)
+**Session Status:** Phase A Scripts Created - Partially Executed (4/6 Complete)
 
 ---
 
@@ -13,18 +13,25 @@
 - [x] Comprehensive hardening plan created
 - [x] Plan approved by user
 - [x] Repository structure defined
+- [x] **Phase A scripts created (all 7 files)**
+- [x] Scripts copied to Proxmox host (/root/proxmox-hardening/)
+- [x] **Script 00: Repository setup executed** ✓
+- [x] **Script 01: NTP configuration executed** ✓
+- [x] **Script 02: Pre-hardening checks executed** ✓
+- [x] **Script 03: SMART monitoring executed** ✓
+- [x] Fixed Proxmox repository warning (removed subscription popup)
 
 ### 🔄 In Progress
-- [ ] Creating hardening scripts (Phase A-C)
+- [ ] Execute Script 04: SSH key setup (NEXT STEP)
+- [ ] Execute Script 05: Remote Access Test (Checkpoint #1)
 
 ### ⏳ Pending
-- [ ] Script review and approval
-- [ ] Copy scripts to Proxmox host
-- [ ] Execute Phase A scripts
 - [ ] Complete Mandatory Checkpoint #1
+- [ ] Create Phase B scripts (7 scripts)
 - [ ] Execute Phase B scripts
 - [ ] Complete Mandatory Checkpoint #2
-- [ ] Move box to remote location
+- [ ] Create Phase C scripts (6 scripts)
+- [ ] Move box to remote location (AFTER Checkpoint #2 passes)
 - [ ] Execute Phase C scripts
 - [ ] Final verification
 
@@ -223,6 +230,7 @@ All items integrated into phased approach with remote access priority.
 
 ## Session Timeline
 
+### Session 1: 2025-12-08
 - **18:00** - Session started, entered planning mode
 - **18:15** - Security assessment completed
 - **18:30** - User requirements gathered
@@ -230,4 +238,18 @@ All items integrated into phased approach with remote access priority.
 - **19:00** - Plan approved, ready for script creation
 - **19:15** - Repository initialized, session saved
 
-**Next Session:** Resume script creation
+### Session 2: 2025-12-09
+- **04:45** - Session resumed
+- **04:55-05:01** - Created all Phase A scripts (00-05 + README)
+- **05:06** - Copied scripts to Proxmox host
+- **05:22** - Executed Script 00: Repository setup ✓
+- **05:22** - Fixed repository format (.sources vs .list)
+- **05:25** - Executed Script 01: NTP setup ✓
+- **05:38** - Executed Script 02: Pre-hardening checks ✓
+- **05:41** - Executed Script 03: SMART monitoring ✓
+- **05:42** - Session paused (Scripts 04-05 pending)
+
+**Next Session:**
+- Execute Script 04: SSH key setup (requires generating SSH keys on desktop)
+- Execute Script 05: Remote Access Test (Checkpoint #1) - MUST PASS before Phase B
+- Create Phase B scripts if Checkpoint #1 passes
