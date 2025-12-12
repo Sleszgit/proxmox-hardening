@@ -122,7 +122,7 @@ echo ""
 # Verify trusted IP
 echo "=== Verifying Trusted IP ==="
 echo "Your current SSH connection is from:"
-CURRENT_IP=$(who am i | awk '{print $5}' | tr -d '()')
+CURRENT_IP=$(echo $SSH_CLIENT | awk '{print $1}')
 if [ -z "$CURRENT_IP" ]; then
     CURRENT_IP=$(last -i | grep "still logged in" | head -1 | awk '{print $3}')
 fi
