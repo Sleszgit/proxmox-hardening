@@ -110,11 +110,12 @@ cat > /etc/fail2ban/filter.d/proxmox.conf << 'EOF'
 
 [Definition]
 
-# Match failed login attempts in daemon.log
-failregex = pvedaemon\[.*\]: authentication failure; rhost=<HOST> user=.* msg=.*
+# Match failed login attempts in systemd journal (pvedaemon)
+# Format: authentication failure; rhost=::ffff:192.168.x.x user=username@realm msg=...
+failregex = ^.*pvedaemon\[.*\]: authentication failure; rhost=(:?:ffff:)?<HOST> user=.* msg=.*$
 
 # Ignore successful logins
-ignoreregex = pvedaemon\[.*\]: successful auth for user
+ignoreregex = ^.*pvedaemon\[.*\]: <.*> successful auth for user.*$
 
 # Author: Proxmox Hardening Script
 EOF
@@ -174,7 +175,8 @@ findtime = 600
 enabled  = true
 port     = https,http,8006
 filter   = proxmox
-logpath  = /var/log/daemon.log
+backend  = systemd
+journalmatch = _SYSTEMD_UNIT=pvedaemon.service
 maxretry = 3
 bantime  = 3600         # Ban for 1 hour
 findtime = 600
